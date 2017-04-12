@@ -12,9 +12,6 @@ defmodule Numbers do
       :world
 
   """
-  def hello do
-    :world
-  end
 
   def fetch_html(url) do
     resp = HTTPoison.get! url
@@ -42,7 +39,7 @@ defmodule Numbers do
     data
     |> Enum.group_by(fn(x) -> x end)
     |> Enum.map(fn({k, v}) -> {k, length(v)} end)
-    |> Enum.sort(fn(a, b) -> elem(a, 1) > elem(b, 1) end)
+    |> Enum.sort(fn(a, b) -> elem(a, 1) < elem(b, 1) end)
     |> Enum.each(fn({k,v}) -> IO.puts("#{k} => #{v}") end)
   end
 
@@ -50,8 +47,7 @@ defmodule Numbers do
     num = List.first(args)
     url = "http://kaeru-dayo.com/numbers#{num}/numbers#{num}-ichiran.php?kaisuu=all"
     data = preparation(url)
-    ret = sum_occurrences(data)
-    IO.inspect ret
+    sum_occurrences(data)
   end
 
 end
